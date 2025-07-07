@@ -128,9 +128,9 @@ ENV nginx_root_directory=/var/www/html/public \
     post_max_size=8M \
     upload_max_filesize=2M \
     zlib_output_compression=On \
-    date_timezone=UTC+3 \
+    date_timezone=UTC \
     intl_default_locale=en_US
-    
+
 COPY --from=composer:2.8 /usr/bin/composer /usr/local/bin/composer
 RUN composer run-script post-install-cmd
 RUN composer dump-autoload
