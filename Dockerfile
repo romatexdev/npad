@@ -16,7 +16,6 @@ RUN npm install
 RUN npm audit fix
 RUN npm run build \
     && rm -rf /var/cache/apk/
-
 COPY . .
 
 # syntax=docker/dockerfile:1
