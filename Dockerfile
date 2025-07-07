@@ -20,8 +20,7 @@ RUN npm run build \
 COPY . .
 
 # syntax=docker/dockerfile:1
-ARG ARCH=
-FROM ${ARCH}alpine:3.21
+FROM alpine:3.21
 
 LABEL org.opencontainers.image.authors="Vitalii Mikhnevych <blackrooty#gmail.com>"
 LABEL org.opencontainers.image.source="https://github.com/rooty/nginx-php84-alpine"
