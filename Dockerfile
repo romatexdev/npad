@@ -114,14 +114,6 @@ EXPOSE 8080
 # Let runit start nginx & php-fpm
 # Ensure /bin/docker-entrypoint.sh is always executed
 ENTRYPOINT ["/sbin/tini", "--", "/bin/docker-entrypoint.sh"]
-
-COPY --from=composer:2.8 /usr/bin/composer /usr/local/bin/composer
-RUN composer run-script post-install-cmd
-RUN composer dump-autoload
-
-# Configure a healthcheck to validate that everything is up&running
-HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:8080/fpm-ping || exit 1
-
 ENV nginx_root_directory=/var/www/html/public \
     client_max_body_size=2M \
     clear_env=no \
@@ -138,3 +130,12 @@ ENV nginx_root_directory=/var/www/html/public \
     zlib_output_compression=On \
     date_timezone=UTC+3 \
     intl_default_locale=en_US
+    
+COPY --from=composer:2.8 /usr/bin/composer /usr/local/bin/composer
+RUN composer run-script post-install-cmd
+RUN composer dump-autoload
+
+# Configure a healthcheck to validate that everything is up&running
+HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:8080/fpm-ping || exit 1
+
+
