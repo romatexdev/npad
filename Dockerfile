@@ -59,6 +59,12 @@ RUN apk --no-cache add \
         php84-zip \
         php84-zlib \
         nginx \
+        tzdata \
+        tini \
+        supervisor \
+        logrotate \
+        dcron \
+        libcap \
         runit \
         curl \
 # Bring in gettext so we can get `envsubst`, then throw
