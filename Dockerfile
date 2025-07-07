@@ -99,6 +99,7 @@ COPY --from=frontend /app/public/build /var/www/html/public/build
 RUN chown -R nobody:nobody /var/www/html
 # Инифиализируем entrypoint скрипт
 RUN ["chmod", "+x", "/bin/docker-entrypoint.sh"]
+RUN ["chmod", "+x", "/etc/service/php-fpm/run"]
 
 
 # Switch to use a non-root user from here on
