@@ -36,20 +36,20 @@ tmpfile=$(mktemp)
 cat /etc/php84/php-fpm.d/www.conf | envsubst "$(env | cut -d= -f1 | sed -e 's/^/$/')" | tee "$tmpfile" > /dev/null
 mv "$tmpfile" /etc/php84/php-fpm.d/www.conf
 
-echo "Starting startup scripts in /docker-entrypoint-init.d ..."
-for script in $(find /docker-entrypoint-init.d/ -executable -type f | sort); do
-
-    echo >&2 "*** Running: $script"
-    $script
-    retval=$?
-    if [ $retval != 0 ];
-    then
-        echo >&2 "*** Failed with return value: $?"
-        exit $retval
-    fi
-
-done
-echo "Finished startup scripts in /docker-entrypoint-init.d"
+#echo "Starting startup scripts in /docker-entrypoint-init.d ..."
+#for script in $(find /docker-entrypoint-init.d/ -executable -type f | sort); do
+#
+#    echo >&2 "*** Running: $script"
+#    $script
+#    retval=$?
+#    if [ $retval != 0 ];
+#    then
+ #       echo >&2 "*** Failed with return value: $?"
+ #       exit $retval
+ #   fi
+#
+#done
+#echo "Finished startup scripts in /docker-entrypoint-init.d"
 
 echo "Starting runit..."
 exec runsvdir -P /etc/service &
